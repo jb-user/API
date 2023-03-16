@@ -2,7 +2,7 @@ package com.coherent.api.training;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TokenResponse {
+public class AuthTokenResponse {
 
     @JsonProperty("access_token")
     private String accessToken;

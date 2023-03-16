@@ -1,15 +1,18 @@
 package com.coherent.api.training;
 
-import org.apache.http.client.methods.HttpGet;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class ApiTests {
+    @Test
+    public void readScopeTokenIsNotEmptyTest() {
+        String readToken = AuthTokenManager.getInstance().getReadToken();
+        Assertions.assertFalse(readToken.isEmpty(), "Token for READ scope is empty.");
+    }
 
-
-    // ToDo: Check was added temporary to execute GET request with read scope, remove
-    public static void main(String[] args) {
-        MyHttpClient httpClient = new MyHttpClient();
-        HttpGet getRequest = new HttpGet("http://localhost:8888/swagger-ui/");
-        String result = httpClient.executeRequest(getRequest);
-        System.out.println("GET response: " + result);
+    @Test
+    public void writeScopeTokenIsNotEmptyTest() {
+        String writeToken = AuthTokenManager.getInstance().getWriteToken();
+        Assertions.assertFalse(writeToken.isEmpty(), "Token for WRITE scope is empty.");
     }
 }
