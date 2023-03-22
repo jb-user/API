@@ -1,5 +1,6 @@
 package com.coherent.api.training;
 
+import com.coherent.api.training.auth.AuthTokenManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

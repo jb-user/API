@@ -1,5 +1,6 @@
-package com.coherent.api.training;
+package com.coherent.api.training.auth;
 
+import com.coherent.api.training.client.CustomHttpClient;
 import com.coherent.api.training.config.ConfigReader;
 import com.coherent.api.training.enums.Scope;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,9 +10,6 @@ import java.io.IOException;
 
 public class AuthTokenManager {
     private static AuthTokenManager INSTANCE;
-    private static final String USERNAME = ConfigReader.getInstance().getProperty("username");
-    private static final String PASSWORD = ConfigReader.getInstance().getProperty("password");
-    private static final String BASE_URL = ConfigReader.getInstance().getProperty("base_url");
     private static final String OAUTH_ENDPOINT = ConfigReader.getInstance().getProperty("oauth_endpoint");
 
     private AuthTokenManager() {
@@ -33,19 +31,13 @@ public class AuthTokenManager {
     }
 
     private String getAuthToken(Scope scope) {
-        HttpResponse response = Request.postRequest(BASE_URL + OAUTH_ENDPOINT)
-                .setHeader("Content-Type", "application/json")
-                .setParameter("grant_type", "client_credentials")
-                .setParameter("scope", scope.getScope())
-                .setBasicAuthentication(USERNAME, PASSWORD)
-                .executeRequest();
+        HttpResponse response = CustomHttpClient.executePostWithBasicAuthAndScope(OAUTH_ENDPOINT,scope);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             return objectMapper.readValue(response.getEntity().getContent(), AuthTokenResponse.class).getAccessToken();
         } catch (IOException e) {
-            throw new RuntimeException("Access toke was not returned!");
+            throw new RuntimeException("Access token was not returned!");
         }
-
     }
 }
 

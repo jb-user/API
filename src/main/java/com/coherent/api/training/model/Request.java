@@ -1,4 +1,4 @@
-package com.coherent.api.training;
+package com.coherent.api.training.model;
 
 import com.coherent.api.training.enums.HttpMethod;
 import org.apache.commons.codec.binary.Base64;
@@ -6,12 +6,15 @@ import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.*;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Map;
 
 import static com.coherent.api.training.enums.HttpMethod.*;
 
@@ -66,6 +69,11 @@ public class Request {
         return this;
     }
 
+    public Request setHeaders(Map<String,String> headers) {
+        headers.forEach((key, value) -> request.setHeader(key, value));
+        return this;
+    }
+
     public Request setParameter(String key, String value) {
         try {
             URI uri = new URIBuilder(request.getRequestLine().getUri()).addParameter(key, value).build();
@@ -85,6 +93,16 @@ public class Request {
 
     public Request setBearerToken(String token) {
         setHeader("Authorization", "Bearer " + token);
+        return this;
+    }
+
+    public Request setBody(String requestBody) {
+        try {
+            StringEntity entity = new StringEntity(requestBody);
+            ((HttpPost) request).setEntity(entity);
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
         return this;
     }
 

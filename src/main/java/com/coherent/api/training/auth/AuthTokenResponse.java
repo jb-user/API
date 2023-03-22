@@ -1,4 +1,4 @@
-package com.coherent.api.training;
+package com.coherent.api.training.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
