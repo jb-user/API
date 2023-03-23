@@ -1,6 +1,5 @@
 package com.coherent.api.training.model;
 
-import com.coherent.api.training.enums.HttpMethod;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
@@ -16,7 +15,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 
-import static com.coherent.api.training.enums.HttpMethod.*;
+import static com.coherent.api.training.model.HttpMethod.*;
 
 public class Request {
     private final HttpRequest request;

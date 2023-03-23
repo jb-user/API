@@ -2,7 +2,8 @@ package com.coherent.api.training.auth;
 
 import com.coherent.api.training.client.CustomHttpClient;
 import com.coherent.api.training.config.ConfigReader;
-import com.coherent.api.training.enums.Scope;
+import com.coherent.api.training.model.AuthTokenResponse;
+import com.coherent.api.training.model.Scope;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpResponse;
 

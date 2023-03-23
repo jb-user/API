@@ -2,7 +2,7 @@ package com.coherent.api.training.client;
 
 import com.coherent.api.training.auth.AuthTokenManager;
 import com.coherent.api.training.config.ConfigReader;
-import com.coherent.api.training.enums.Scope;
+import com.coherent.api.training.model.Scope;
 import com.coherent.api.training.model.Request;
 import org.apache.http.HttpResponse;
 

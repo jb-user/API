@@ -1,4 +1,4 @@
-package com.coherent.api.training.enums;
+package com.coherent.api.training.model;
 
 public enum Scope {
     READ("read"),
